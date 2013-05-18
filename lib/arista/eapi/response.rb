@@ -19,28 +19,38 @@ module Arista
         1005 => Arista::EAPI::Error::AmbiguousCommand
       }
 
+      PARSERS = [ Arista::EAPI::Parser::Show ]
+
       attr_accessor :code, :response, :results
 
-      def initialize(body)
+      def initialize(commands, body)
         self.response = JSON.parse(body)
+        self.results = []
 
         if response['error']
           code = response['error']['code']
           raise code < 0 ? Exception.new(response['message']) : ERROR_CODES[code]
         end
-        
-        self.results = convert_hash_keys(response['result'])
+
+        commands.each_with_index do |cmd, idx|
+          output = response['result'][idx]['output']
+          parsed = Arista::EAPI::Parser.parse(cmd, output)
+          results << convert_hash_keys(parsed)
+        end
+
+        results
       end
 
       private
 
-      def symbolize(string)
-        string.
-          gsub(/\//, '_').
-          gsub(/([A-Z]+)([A-Z][a-z])/,'\1_\2').
-          gsub(/([a-z\d])([A-Z])/,'\1_\2').
-          downcase.
-          to_sym
+      def symbolize(obj)
+        obj.is_a?(Symbol) ? obj :
+          obj.
+            gsub(/\//, '_').
+            gsub(/([A-Z]+)([A-Z][a-z])/,'\1_\2').
+            gsub(/([a-z\d])([A-Z])/,'\1_\2').
+            downcase.
+            to_sym
       end
 
       def convert_hash_keys(value)

@@ -4,6 +4,8 @@ require 'json'
 require 'restclient'
 
 require 'arista/eapi/format'
+require 'arista/eapi/parser'
+require 'arista/eapi/parser/show'
 require 'arista/eapi/request'
 require 'arista/eapi/response'
 require 'arista/eapi/switch'

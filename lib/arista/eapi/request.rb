@@ -20,7 +20,7 @@ class Arista::EAPI::Request
   end
 
   def execute
-    Arista::EAPI::Response.new(RestClient.post(switch.url, payload))
+    Arista::EAPI::Response.new(commands, RestClient.post(switch.url, payload))
   end
 
   def self.execute!(switch, *commands)
