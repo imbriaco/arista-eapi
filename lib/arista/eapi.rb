@@ -24,7 +24,7 @@ module Arista
     #
     # Returns json if all commands support JSON output, otherwise returns text.
     def self.format_for(*commands)
-      (commands - Arista::EAPI::Format::JSON_COMMANDS).size > 0 ? 'text' : 'json'
+      (commands.flatten - Arista::EAPI::Format::JSON_COMMANDS).size > 0 ? 'text' : 'json'
     end
   end
 end
