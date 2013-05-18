@@ -13,17 +13,16 @@ class Arista::EAPI::Switch
   end
 
   def interfaces
-    run('show interfaces') unless attributes[:interfaces]
+    run('show interfaces')
     attributes[:interfaces]
   end
 
   def version
-    run('show version') unless attributes[:version]
-    attributes[:version]
+    run('show version').first
   end
 
   def update_attributes!(results)
-    results.each { |result| attributes.merge!(result) }
+    results.each { |result| attributes.merge!(result) if result.is_a?(Hash) }
   end
 
   def run(*commands)
