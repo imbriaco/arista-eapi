@@ -1,0 +1,27 @@
+class Arista::EAPI::Format
+  JSON_COMMANDS = [
+    'show aliases',
+    'show interfaces',
+    'show interfaces counters',
+    'show interfaces counters discards',
+    'show interfaces status',
+    'show interfaces switchport vlan mapping',
+    'show ip interface',
+    'show ipv6 interface',
+    'show mac address-table',
+    'show mac address-table aging-time',
+    'show management api http-commands',
+    'show management api http-commands certificate',
+    'show monitor server-failure history',
+    'show monitor server-failure servers',
+    'show monitor session',
+    'show privilege',
+    'show sflow',
+    'show sflow interfaces',
+    'show spanning-tree topology status',
+    'show version',
+    'show version license',
+    'show vlan',
+    'show vlan trunk group',
+  ]
+end
