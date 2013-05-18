@@ -33,9 +33,13 @@ module Arista
         end
 
         commands.each_with_index do |cmd, idx|
-          output = response['result'][idx]['output']
-          parsed = Arista::EAPI::Parser.parse(cmd, output)
-          results << convert_hash_keys(parsed)
+          results <<
+            case Arista::EAPI.format_for(commands)
+            when 'json' then
+              convert_hash_keys(response['result'][idx])
+            else
+              Arista::EAPI::Parser.parse(cmd, response['result'][idx]['output'])
+            end
         end
 
         results

@@ -4,7 +4,12 @@ class Arista::EAPI::Parser
     parser_method = command.gsub(/\s/, '_')
 
     parser = self.const_get(parser_class)
-    parser.send(parser_method, body) if parser.respond_to?(parser_method.to_sym)
+
+    if parser.respond_to?(parser_method.to_sym)
+      parser.send(parser_method, body)
+    else
+      body
+    end
   rescue NameError
     body
   end
