@@ -36,7 +36,7 @@ module Arista
           results << process_result(cmd, response['result'][idx])
         end
 
-        commands.size == 1 ? results.first : results
+        results
       end
 
       def process_result(cmd, result)
