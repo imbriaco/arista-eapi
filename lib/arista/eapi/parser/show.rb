@@ -1,6 +1,6 @@
 module Arista
   module EAPI
-    module Parser
+    class Parser
       class Show
         def self.show_lldp_neighbors(body)
           lldp = {
@@ -8,8 +8,8 @@ module Arista
             :ports => {}
           }
 
-          lldp[:last_update] = body.match(/^Last table change time\s+:\s(?<last_update>.*?)$/m)[:last_update]
-          ports = body.match(/.*Neighbor Port ID\s*TTL\s(?<ports>.*)/m)[:ports]
+          lldp[:last_update] = body.match(/^Last table change time\s+:\s(.*?)$/m)[1]
+          ports = body.match(/.*Neighbor Port ID\s*TTL\s(.*)/m)[1]
 
           unless ports.nil?
             ports.split("\n").each do |line|
