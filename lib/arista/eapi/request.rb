@@ -27,11 +27,6 @@ module Arista
       def execute
         Arista::EAPI::Response.new(commands, RestClient.post(switch.url, payload))
       end
-
-      def self.execute!(switch, *commands)
-        req = self.new(switch, *commands)
-        req.execute
-      end
     end
   end
 end
