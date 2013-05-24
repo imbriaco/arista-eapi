@@ -40,10 +40,10 @@ module Arista
       end
 
       def process_result(cmd, result)
-        if result.is_a? Hash then
-          convert_hash_keys(result)
-        else
+        if result['output']
           Arista::EAPI::Parser.parse(cmd, result['output'])
+        else
+          convert_hash_keys(result)
         end
       end
 
