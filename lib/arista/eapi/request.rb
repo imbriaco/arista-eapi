@@ -1,11 +1,14 @@
 module Arista
   module EAPI
     class Request
-      attr_accessor :switch, :commands
+      attr_accessor :switch, :commands, :options
 
-      def initialize(switch, *commands)
+      def initialize(switch, commands, options = {})
+        options[:format] ||= 'json'
+
         self.switch = switch
         self.commands = commands
+        self.options = options
       end
 
       def payload
@@ -16,7 +19,7 @@ module Arista
           :params  => {
             :version => 1,
             :cmds    => commands,
-            :format  => Arista::EAPI.format_for(commands)
+            :format  => options[:format]
           },
         })
       end

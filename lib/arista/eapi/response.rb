@@ -40,8 +40,7 @@ module Arista
       end
 
       def process_result(cmd, result)
-        case Arista::EAPI.format_for(cmd)
-        when 'json' then
+        if result.is_a? Hash then
           convert_hash_keys(result)
         else
           Arista::EAPI::Parser.parse(cmd, result['output'])

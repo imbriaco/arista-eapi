@@ -15,20 +15,26 @@ module Arista
       end
 
       def interfaces
-        run('show interfaces')
+        run!('show interfaces')
         attributes[:interfaces]
       end
 
       def version
-        run('show version').first
+        run!('show version')
       end
 
       def update_attributes!(results)
         results.each { |result| attributes.merge!(result) if result.is_a?(Hash) }
       end
 
-      def run(*commands)
-        request = Arista::EAPI::Request.new(self, *commands)
+      # Public: Run the 
+      #
+      # options - Options to pass to the eAPI call.
+      #           :format - The format for the eAPI response. Accepts the strings
+      #                     "json" or "text". (Defaults to json)
+      #
+      def run(commands, options={})
+        request = Arista::EAPI::Request.new(self, commands, options)
         self.update_attributes!(request.execute.results)
       end
     end
