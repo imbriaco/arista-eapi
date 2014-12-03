@@ -60,7 +60,7 @@ class MockCli
 
   def username(input)
     # Regex for now. CLI parsing is preferred, WIP in treetop branch
-    standard = /username[\s]+([a-zA-Z\-]+)[\s]+role[\s]+([a-zA-Z\-]+)[\s]+secret[\s]+([\d])+[\s]+([a-zA-Z\-]+)/.match(input)
+    standard = /username[\s]+([a-zA-Z\-0-9]+)[\s]+role[\s]+([a-zA-Z\-]+)[\s]+secret[\s]+([\d])+[\s]+(.*)/.match(input)
     sshkey = /username[\s]+([a-zA-Z\-]+)[\s]+sshkey[\s]+(.*)/.match(input)
 
     if standard

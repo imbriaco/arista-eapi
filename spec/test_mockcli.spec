@@ -49,6 +49,19 @@ describe 'MockCli' do
     expect(response).to eq 'Incomplete command'
   end
 
+  it 'MockCli#username success with number in name' do
+    user = "test3"
+    password = "password"
+    role = "network-admin"
+
+    cli = MockCli.new()
+    cli.run(['enable'])
+    cli.run(['configure'])
+    cmd = "username #{user} role #{role} secret 0 #{password}"
+    response = cli.run([cmd])
+    expect(response).to eq ''
+  end
+
   it 'MockCli#username success' do
     user = "test"
     password = "password"
@@ -59,7 +72,7 @@ describe 'MockCli' do
     cli.run(['configure'])
     cmd = "username #{user} role #{role} secret 0 #{password}"
     response = cli.run([cmd])
-    expect(response).to eq '{}'
+    expect(response).to eq ''
   end
 
   it 'MockCli#show running-config' do
