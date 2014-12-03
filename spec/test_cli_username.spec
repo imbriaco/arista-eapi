@@ -53,4 +53,19 @@ describe 'MockCli' do
     response = cli.run([cmd])
     expect(response).to eq '{}'
   end
+
+  it 'MockCli#show running-config' do
+    user = "test"
+    password = "password"
+    role = "network-admin"
+
+    cli = MockCli.new()
+    cli.run(['enable'])
+    cli.run(['configure'])
+    cmd = "username #{user} role #{role} secret 0 #{password}"
+    response = cli.run([cmd])
+    response = cli.run(['show running-config'])
+    expect(response).to eq [cmd]
+  end
+
 end

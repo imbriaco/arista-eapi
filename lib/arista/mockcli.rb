@@ -1,7 +1,7 @@
 class MockCli
-  @@configure = ['username', 'configuretest']
+  @@configure = ['username', 'show']
   @@default= ['enable']
-  @@enable = ['configure']
+  @@enable = ['configure', 'show']
 
   def initialize()
     @running_config = []
@@ -37,6 +37,17 @@ class MockCli
 
   def invalid_command(input)
     'Incomplete command'
+  end
+
+  def show(input)
+    standard = /show[\s]+([a-zA-Z\-]+)/.match(input)
+    if standard
+      if standard[1] == 'running-config'
+        return @running_config
+      end
+    else
+      invalid_command(input)
+    end
   end
 
   def username(input)
