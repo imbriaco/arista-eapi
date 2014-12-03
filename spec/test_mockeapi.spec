@@ -19,6 +19,24 @@ describe 'External request' do
     puts "client response: #{response}"
   end
 
+  it 'MockeAPI#username successful' do
+    switch = Arista::EAPI::Switch.new(hostname, user, password, "http")
+    response = switch.run( ['enable', "configure", 'username bao role net-admin secret 0 password'] )
+    expect(response).to eq ['{}', '{}', '{}']
+  end
+
+  it 'MockeAPI#username error' do
+    switch = Arista::EAPI::Switch.new(hostname, user, password, "http")
+    response = switch.run( ['enable', "configure", 'username bao net-admin secret 0 password'] )
+    expect(response).to eq ['{}', '{}', 'Incomplete command']
+  end
+
+#  it 'MockeAPI#verify' do
+#    switch = Arista::EAPI::Switch.new(hostname, user, password, "http")
+#    response = switch.run( ['enable', "show version"] )
+#    puts "client response: #{response}"
+#  end
+
 #  it 'enable using RestClient' do
 #    payload = {
 #        "version" => 1,
