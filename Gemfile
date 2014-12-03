@@ -9,6 +9,7 @@ group 'test' do
   gem 'sinatra'
   gem 'rspec'
   gem 'webmock'
+  gem 'treetop'
 end
 
 group 'development' do
