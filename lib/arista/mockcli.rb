@@ -1,3 +1,6 @@
+# TODO: verify ssh key on input
+# require 'sshkey'
+
 class MockCli
   @@configure = ['username', 'show']
   @@default= ['enable']
