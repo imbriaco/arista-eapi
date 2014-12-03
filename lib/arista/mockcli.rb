@@ -28,7 +28,7 @@ class MockCli
   end
 
   def successful
-    '{}'
+    ''
   end
 
   def invalid_input(input)
@@ -42,11 +42,16 @@ class MockCli
   def show(input)
     standard = /show[\s]+([a-zA-Z\-]+)/.match(input)
     if standard
-      if standard[1] == 'running-config'
+      case
+      when standard[1] == 'running-config'
         return @running_config
+      when standard[1] == 'version'
+        return "version"
+      else
+        return invalid_command(input)
       end
     else
-      invalid_command(input)
+      invalid_input(input)
     end
   end
 
@@ -82,19 +87,21 @@ class MockCli
     @enable = false
     @configure = false
     @default = true
+    return successful
   end
 
   def enable(*p)
     @enable = true
     @configure = false
     @default = false
-
+    return successful
   end
 
   def configure(*p)
     @enable = false
     @configure = true
     @default = false
+    return successful
   end
 
   def valid_input?(input)

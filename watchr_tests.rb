@@ -1,4 +1,4 @@
-watch('tests/(.*).rb')     { |md| system "rspec tests/#{md[1]}.rb"}
-watch('lib/(.*).rb')     { |md| system "rspec spec/test_cli_username.spec"}
+watch('spec/(.*).spec')     { |md| system "rspec spec/#{md[1]}.spec"}
+watch('lib/arista/(.*).rb')     { |md| system "rspec spec/test_#{md[1]}.spec"}
 #watch('lib/(.*).treetop')     { |md| system "ruby lib/parser.rb"}
 #watch('lib/(.*).rb')     { |md| system "ruby lib/parser.rb"}
