@@ -75,6 +75,61 @@ describe 'MockCli' do
     expect(response).to eq ''
   end
 
+  it 'MockCli#username sshkey successful' do
+    user = "test"
+    password = "password"
+    sshkey = "ssh-rsa AAAAB3NzaC1yc2EAAAABIwAAAQEA2zGA/4TgBKdcwQQewyIvlXUQ62yV0kxxUFSV+sGzDxzpE6zK+pJj2DZlrKt6i3om3eMFSOd2MV45C/YFvaxe73ufipRQ7hvzlWMWB7MgCHygWW3qJGX/3qix/AvQU4mr4iWIG/Uin169Cdk93Siv7IRXf5tGE6nw6O1nTNONT5M188AgWRH48P9kQ4wotSlPn5Msy7F/ZTf6Vnqq9yj/3rQzob2pm+DSW9xsXIrz/hjadSjhV7rn0Yh3appIjOxigfFmFjpNHyzb2KUpRq2QT606vAMlk88QcoK7kyTsJ/oN7IG9Ekh3IIURXTeFs/EW+AmfrtFeV3KoMXf6jFdDAw== bnguyen@zero"
+
+    cli = MockCli.new()
+    cli.run(['enable'])
+    cli.run(['configure'])
+    cmd = "username #{user} sshkey #{sshkey}"
+    response = cli.run([cmd])
+    expect(response).to eq ''
+  end
+
+  it 'MockCli#username sshkey invalid key' do
+    user = "test"
+    password = "password"
+    sshkey = "ssh-rsa IwAAAQEA2zGA/4TgBKdcwQQewyIvlXUQ62yV0kxxUFSV+sGzDxzpE6zK+pJj2DZlrKt6i3om3eMFSOd2MV45C/YFvaxe73ufipRQ7hvzlWMWB7MgCHygWW3qJGX/3qix/AvQU4mr4iWIG/Uin169Cdk93Siv7IRXf5tGE6nw6O1nTNONT5M188AgWRH48P9kQ4wotSlPn5Msy7F/ZTf6Vnqq9yj/3rQzob2pm+DSW9xsXIrz/hjadSjhV7rn0Yh3appIjOxigfFmFjpNHyzb2KUpRq2QT606vAMlk88QcoK7kyTsJ/oN7IG9Ekh3IIURXTeFs/EW+AmfrtFeV3KoMXf6jFdDAw== bnguyen@zero"
+
+    cli = MockCli.new()
+    cli.run(['enable'])
+    cli.run(['configure'])
+    cmd = "username #{user} sshkey #{sshkey}"
+    response = cli.run([cmd])
+    expect(response).to eq 'Unrecognized ssh key'
+  end
+
+
+  it 'MockCli#username success' do
+    user = "test"
+    password = "password"
+    role = "network-admin"
+
+    cli = MockCli.new()
+    cli.run(['enable'])
+    cli.run(['configure'])
+    cmd = "username #{user} role #{role} secret 0 #{password}"
+    response = cli.run([cmd])
+    expect(response).to eq ''
+  end
+
+
+  it 'MockCli#username success' do
+    user = "test"
+    password = "password"
+    role = "network-admin"
+
+    cli = MockCli.new()
+    cli.run(['enable'])
+    cli.run(['configure'])
+    cmd = "username #{user} role #{role} secret 0 #{password}"
+    response = cli.run([cmd])
+    expect(response).to eq ''
+  end
+
+
   it 'MockCli#show running-config' do
     user = "test"
     password = "password"
@@ -88,5 +143,4 @@ describe 'MockCli' do
     response = cli.run(['show running-config'])
     expect(response).to eq [cmd]
   end
-
 end

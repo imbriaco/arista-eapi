@@ -1,5 +1,4 @@
-# TODO: verify ssh key on input
-# require 'sshkey'
+require 'sshkey'
 
 class MockCli
   @@configure = ['username', 'show']
@@ -60,15 +59,20 @@ class MockCli
 
   def username(input)
     # Regex for now. CLI parsing is preferred, WIP in treetop branch
-    standard = /username[\s]+([a-zA-Z\-0-9]+)[\s]+role[\s]+([a-zA-Z\-]+)[\s]+secret[\s]+([\d])+[\s]+(.*)/.match(input)
-    sshkey = /username[\s]+([a-zA-Z\-]+)[\s]+sshkey[\s]+(.*)/.match(input)
+    standard = /username[\s]+([a-zA-Z0-9\-]+)[\s]+role[\s]+([a-zA-Z\-]+)[\s]+secret[\s]+([\d])+[\s]+(.*)/.match(input)
+    sshkey = /username[\s]+([a-zA-Z0-9\-]+)[\s]+sshkey[\s]+(.*)/.match(input)
 
     if standard
       @running_config << input
       return successful
     elsif sshkey
-      @running_config << input
-      return successful
+      puts "sshkey: #{sshkey[2]}"
+      if SSHKey.valid_ssh_public_key?(sshkey[2])
+        @running_config << input
+        return successful
+      else
+        return "Unrecognized ssh key"
+      end
     else
       invalid_command(input)
     end
