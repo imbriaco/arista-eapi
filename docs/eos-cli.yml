@@ -1,0 +1,75 @@
+default
+
+  clear       Reset functions
+  connect     Open a terminal connection
+  default     Set a command to its defaults
+  disable     Turn off privileged commands
+  enable      Turn on privileged commands
+  exit        Exit from Exec mode
+  help        Description of the interactive help system
+  logout      Exit from EXEC mode
+  no          Negate a command or set its defaults
+  ping        Send echo messages
+  show        Show running system information
+  ssh         Open ssh connection
+  tcpdump     Monitor packets with tcpdump
+  telnet      Open a telnet connection
+  terminal    Set terminal parameters
+  traceroute  Trace route to destination
+  watch       Execute a command repeatedly
+  zerotouch   ZeroTouch configuration
+
+enable
+
+gent            Configure agent settings
+  bash             Field engineering bash access
+  cd               Change current directory
+  clear            Reset functions
+  clock            Configure the system clock
+  configure        Enter configuration mode
+  connect          Open a terminal connection
+  copy             Copy from one file to another
+  debug            Debug command
+  default          Set a command to its defaults
+  delete           Delete a file
+  diagnostic       Enter diagnostic test mode
+  diff             Diff one file with another
+  dir              List files on a filesystem
+  disable          Turn off privileged commands
+  enable           Turn on privileged commands
+  erase            Erase startup Configuration
+  event-monitor    Run event monitor actions
+  exit             Exit from Exec mode
+  extension        Install an EOS extension
+  help             Description of the interactive help system
+  install          Install software image
+  locator-led      Set a specific LED to flash
+  logout           Exit from EXEC mode
+  mkdir            Create a directory
+  more             Display the contents of a file
+  no               Negate a command or set its defaults
+  ping             Send echo messages
+  pwd              Display current working directory
+  python-shell     Break into a Python shell
+  reload           Halt and perform a cold restart
+  rename           Rename a file
+  reset            Reset various components of the switch
+  rmdir            Delete a directory
+  routing-context  Enter VRF context
+  send             Generate log message
+  show             Show running system information
+  ssh              Open ssh connection
+  tcpdump          Monitor packets with tcpdump
+  telnet           Open a telnet connection
+  terminal         Set terminal parameters
+  test             Test feature
+  trace            Monitor trace output
+  traceroute       Trace route to destination
+  undebug          Disable debug messages
+  verify           Verify a file
+  wait-for-warmup  Block until agents declare themselves as warm
+  watch            Execute a command repeatedly
+  write            Write configuration
+  xmpp             XMPP client commands
+
+
